@@ -26,15 +26,8 @@ declare(strict_types=1);
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *
  */
-namespace OCP\AppFramework\Bootstrap;
 
-use OCP\AppFramework\IAppContainer;
-use OCP\Authentication\TwoFactorAuth\IProvider;
-use OCP\Capabilities\ICapability;
-use OCP\EventDispatcher\IEventDispatcher;
-use OCP\Files\Template\ICustomTemplateProvider;
-use OCP\IContainer;
-use OCP\Notification\INotifier;
+namespace OCP\AppFramework\Bootstrap;
 
 /**
  * The context object passed to IBootstrap::register
@@ -74,6 +67,17 @@ interface IRegistrationContext {
 	 * @since 20.0.0
 	 */
 	public function registerDashboardWidget(string $widgetClass): void;
+
+	/**
+	 * Register an implementation of \OCP\Profile\IAction that
+	 * will handle the implementation of a profile action
+	 *
+	 * @param string $actionClass
+	 * @psalm-param class-string<\OCP\Profile\IAction> $actionClass
+	 * @since 23.0.0
+	 */
+	public function registerProfileAction(string $actionClass): void;
+
 	/**
 	 * Register a service
 	 *

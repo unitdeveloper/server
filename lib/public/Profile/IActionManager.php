@@ -3,9 +3,9 @@
 declare(strict_types=1);
 
 /**
- * @copyright Copyright (c) 2021 John Molakvoæ <skjnldsv@protonmail.com>
+ * @copyright 2021 Christopher Ng <chrng8@gmail.com>
  *
- * @author John Molakvoæ <skjnldsv@protonmail.com>
+ * @author Christopher Ng <chrng8@gmail.com>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -26,22 +26,43 @@ declare(strict_types=1);
 
 namespace OCP\Profile;
 
+use OC\Profile\Actions\EmailAction;
+use OC\Profile\Actions\PhoneAction;
+use OC\Profile\Actions\TwitterAction;
+use OC\Profile\Actions\WebsiteAction;
+use OCP\IUser;
+use OCP\Profile\IAction;
+
 /**
- * @since 23
+ * @since 23.0.0
  */
 interface IActionManager {
 
 	/**
-	 * Register a new action for the user profile page
+	 * Array of account property action classes
 	 *
-	 * @since 23
+	 * @since 23.0.0
 	 */
-	public function registerAction(string $action, string $value): void;
+	public const ACCOUNT_PROPERTY_ACTION_QUEUE = [
+		EmailAction::class,
+		PhoneAction::class,
+		WebsiteAction::class,
+		TwitterAction::class,
+	];
 
 	/**
-	 * Returns the list of all registered profile actions
+	 * Queue an action for registration
 	 *
-	 * @since 23
+	 * @since 23.0.0
 	 */
-	public function getActions(): array;
+	public function queueAction(string $actionClass): void;
+
+	/**
+	 * Returns an array of registered profile actions for the user
+	 *
+	 * @return IAction[]
+	 *
+	 * @since 23.0.0
+	 */
+	public function getActions(IUser $user, IUser|null $visitingUser): array;
 }

@@ -78,7 +78,7 @@ class ProfileProvider implements IProvider {
 			$account = $this->accountManager->getAccount($user);
 			if ($this->isProfileEnabled($account)) {
 				$iconUrl = $this->urlGenerator->getAbsoluteURL($this->urlGenerator->imagePath('core', 'actions/profile.svg'));
-				$profileActionText = $this->l10nFactory->get('core')->t('Open profile of') . ' ' . $entry->getProperty('FN');
+				$profileActionText = $this->l10nFactory->get('core')->t('View profile');
 				$profileUrl = $this->urlGenerator->linkToRouteAbsolute('core.profile.index', ['userId' => $entry->getProperty('UID')]);
 				$action = $this->actionFactory->newLinkAction($iconUrl, $profileActionText, $profileUrl);
 				// Set highest priority (by descending order), other actions have the default priority 10 as defined in lib/private/Contacts/ContactsMenu/Actions/LinkAction.php
